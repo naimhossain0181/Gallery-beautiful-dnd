@@ -1,0 +1,32 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 3fr);
+  justify-content: space-between;
+  gap: 10px;
+}
+.drop-box{
+  width: 400px;
+  height: 400px;
+  background: gray;
+}
+.grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid gray;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+
+.large {
+  grid-row: span 2;
+  grid-column: span 2;
+
+}
+img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}

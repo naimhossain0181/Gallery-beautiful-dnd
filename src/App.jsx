@@ -25,40 +25,36 @@ const App = () => {
   }
   return (
     <div >
-      <DragDropContext  onDragEnd={onDragEnd} >
-        <Droppable droppableId='DropBox'>
-            {
-              (provider)=>(
-                <div className='drop-box' {...provider.droppableProps} ref={provider.innerRef}>
-                    <img src={images[0]?.image} alt="" />
-                    {provider.placeholder}
-
-                </div>
-              )
-            }
-        </Droppable>
-        <Droppable droppableId="abc">
-          {
-            (provider)=>(
-              <div className='grid-container' {...provider.droppableProps} ref={provider.innerRef}>
-                  {
-                    images?.slice(0).map((item,index)=>(
-                      <Draggable key={item.id} draggableId={item.id} index={index}>
+      <DragDropContext  onDragEnd={onDragEnd}  >
+        <div className='grid-container'>
+        {
+          images?.map((item,index)=>(
+              <Droppable droppableId={item.id} key={item.id} >
+                {
+                  (dropablePovider,snapshot)=>(
+                      <div className='grid-item' ref={dropablePovider.innerRef} {...dropablePovider.droppableProps}>
+                        <Draggable draggableId={item.id} index={index} >
                           {
-                            (provider)=>(
-                              <div className='grid-item' ref={provider.innerRef} {...provider.draggableProps} {...provider.dragHandleProps}>
-                                <img src={item.image} alt="img" />
+                            (dragablePovider,snapshot)=>(
+                              <div className='placeholder' ref={dragablePovider.innerRef} {...dragablePovider.draggableProps} {...dragablePovider.dragHandleProps}>
+                                  <img src={item.image} alt="img" />
                               </div>
-                            )
+                  )
                           }
-                      </Draggable>
-                    ))
-                  }
-                  {provider.placeholder}
-              </div>
-            )
-          }
-        </Droppable>
+                        </Draggable>
+                        {
+                          dropablePovider.placeholder
+                         
+                        }
+                      </div>
+                  )
+                }
+
+              </Droppable>
+          ))
+        }
+        </div>
+       
       </DragDropContext>
     </div>
   );
